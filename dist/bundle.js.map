@@ -1,0 +1,1 @@
+{"version":3,"file":"bundle.js","mappings":";;;;AAAAA,OAAO,CAACC,GAAG,CAAC,yBAAyB,CAAC,C","sources":["webpack://weather-wise/./src/index.js"],"sourcesContent":["console.log('Hello, WeatherWise App!');"],"names":["console","log"],"sourceRoot":""}
