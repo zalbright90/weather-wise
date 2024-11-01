@@ -307,6 +307,50 @@ div:has(> h2:contains("Forecast")) div {
     -webkit-backdrop-filter: blur(4px);
 }
 
+/* Loading overlay */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(41, 47, 54, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+/* Loading spinner */
+.loader {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(78, 205, 196, 0.3);
+    border-radius: 50%;
+    border-top-color: rgb(78, 205, 196);
+    animation: spin 1s ease-in-out infinite;
+    margin: 0 auto;
+}
+
+.loader-text {
+    color: rgb(78, 205, 196);
+    text-align: center;
+    margin-top: 20px;
+    font-size: 1.2rem;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Hide loader by default */
+.hidden {
+    display: none;
+}
+
 /* Desktop styles */
 @media (min-width: 768px) {
     body {
@@ -329,7 +373,7 @@ div:has(> h2:contains("Forecast")) div {
     .weather-gif img {
         max-width: 80%;
     }
-}`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"AAAA,6BAA6B;AAC7B;IACI,2BAA2B;IAC3B,8BAA8B;IAC9B,2BAA2B;IAC3B,oCAAoC;IACpC,yCAAyC;AAC7C;;AAEA;IACI,SAAS;IACT,UAAU;IACV,sBAAsB;AAC1B;;AAEA,6BAA6B;AAC7B;IACI,8BAA8B;IAC9B,gBAAgB;IAChB,mBAAmB;IACnB,iBAAiB;IACjB,aAAa;IACb,8EAA8E;AAClF;;AAEA,2BAA2B;AAC3B;IACI,WAAW;IACX,eAAe;IACf,cAAc;IACd,eAAe;IACf,2BAA2B;IAC3B,mBAAmB;IACnB,yCAAyC;IACzC,4BAA4B;IAC5B,oCAAoC;IACpC,qCAAqC;AACzC;;AAEA,iBAAiB;AACjB;IACI,aAAa;IACb,sBAAsB;IACtB,SAAS;IACT,mBAAmB;AACvB;;AAEA;IACI,iBAAiB;IACjB,mBAAmB;IACnB,iBAAiB;AACrB;;AAEA;IACI,WAAW;IACX,eAAe;IACf,qCAAqC;IACrC,mBAAmB;IACnB,eAAe;IACf,qCAAqC;IACrC,mBAAmB;IACnB,0BAA0B;IAC1B,kCAAkC;AACtC;;AAEA;IACI,aAAa;IACb,8BAA8B;IAC9B,6CAA6C;AACjD;;AAEA;IACI,+BAA+B;AACnC;;AAEA;IACI,WAAW;IACX,eAAe;IACf,kCAAkC;IAClC,sBAAsB;IACtB,YAAY;IACZ,mBAAmB;IACnB,eAAe;IACf,eAAe;IACf,iBAAiB;IACjB,yBAAyB;AAC7B;;AAEA;IACI,yCAAyC;IACzC,2BAA2B;AAC/B;;AAEA,aAAa;AACb;IACI,uBAAuB;IACvB,qBAAqB;IACrB,iBAAiB;IACjB,gDAAgD;IAChD,sBAAsB;AAC1B;;AAEA,wBAAwB;AACxB;IACI,gBAAgB;IAChB,eAAe;IACf,mBAAmB;AACvB;;AAEA,wBAAwB;AACxB;IACI,gBAAgB;IAChB,kBAAkB;AACtB;;AAEA;IACI,eAAe;IACf,YAAY;IACZ,mBAAmB;IACnB,yCAAyC;AAC7C;;AAEA,sBAAsB;AACtB;IACI,aAAa;IACb,cAAc;IACd,qCAAqC;IACrC,mBAAmB;IACnB,uCAAuC;IACvC,0BAA0B;IAC1B,kCAAkC;AACtC;;AAEA,mBAAmB;AACnB;IACI;QACI,aAAa;IACjB;;IAEA;QACI,gBAAgB;QAChB,aAAa;IACjB;;IAEA;QACI,iBAAiB;IACrB;;IAEA;QACI,iBAAiB;IACrB;;IAEA;QACI,cAAc;IAClB;AACJ","sourcesContent":["/* Base reset and variables */\n:root {\n    --gunmetal: rgb(41, 47, 54);\n    --robin-egg: rgb(78, 205, 196);\n    --white: rgb(255, 255, 255);\n    --glass-bg: rgba(255, 255, 255, 0.1);\n    --glass-border: rgba(255, 255, 255, 0.18);\n}\n\n* {\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n}\n\n/* Mobile-first base styles */\nbody {\n    font-family: Arial, sans-serif;\n    line-height: 1.6;\n    color: var(--white);\n    min-height: 100vh;\n    padding: 1rem;\n    background: linear-gradient(135deg, var(--gunmetal) 0%, var(--robin-egg) 100%);\n}\n\n/* Glass container effect */\n#app {\n    width: 100%;\n    max-width: 100%;\n    margin: 0 auto;\n    padding: 1.5rem;\n    background: var(--glass-bg);\n    border-radius: 16px;\n    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);\n    backdrop-filter: blur(8.5px);\n    -webkit-backdrop-filter: blur(8.5px);\n    border: 1px solid var(--glass-border);\n}\n\n/* Form styling */\n#locationForm {\n    display: flex;\n    flex-direction: column;\n    gap: 1rem;\n    margin-bottom: 2rem;\n}\n\n#locationForm label {\n    font-weight: bold;\n    color: var(--white);\n    font-size: 1.1rem;\n}\n\n#locationForm input {\n    width: 100%;\n    padding: 0.8rem;\n    border: 2px solid var(--glass-border);\n    border-radius: 12px;\n    font-size: 1rem;\n    background: rgba(255, 255, 255, 0.05);\n    color: var(--white);\n    backdrop-filter: blur(4px);\n    -webkit-backdrop-filter: blur(4px);\n}\n\n#locationForm input:focus {\n    outline: none;\n    border-color: var(--robin-egg);\n    box-shadow: 0 0 0 2px rgba(78, 205, 196, 0.2);\n}\n\n#locationForm input::placeholder {\n    color: rgba(255, 255, 255, 0.6);\n}\n\n#locationForm button {\n    width: 100%;\n    padding: 0.8rem;\n    background-color: var(--robin-egg);\n    color: var(--gunmetal);\n    border: none;\n    border-radius: 12px;\n    cursor: pointer;\n    font-size: 1rem;\n    font-weight: bold;\n    transition: all 0.3s ease;\n}\n\n#locationForm button:hover {\n    background-color: rgba(78, 205, 196, 0.8);\n    transform: translateY(-2px);\n}\n\n/* Headings */\nh1, h2 {\n    color: var(--robin-egg);\n    margin-bottom: 1.5rem;\n    font-size: 1.5rem;\n    border-bottom: 2px solid rgba(78, 205, 196, 0.3);\n    padding-bottom: 0.5rem;\n}\n\n/* Weather information */\np {\n    margin: 0.8rem 0;\n    font-size: 1rem;\n    color: var(--white);\n}\n\n/* Weather GIF styling */\n.weather-gif {\n    margin: 1.5rem 0;\n    text-align: center;\n}\n\n.weather-gif img {\n    max-width: 100%;\n    height: auto;\n    border-radius: 16px;\n    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);\n}\n\n/* Forecast sections */\ndiv:has(> h2:contains(\"Forecast\")) div {\n    padding: 1rem;\n    margin: 1rem 0;\n    background: rgba(255, 255, 255, 0.05);\n    border-radius: 12px;\n    border-left: 4px solid var(--robin-egg);\n    backdrop-filter: blur(4px);\n    -webkit-backdrop-filter: blur(4px);\n}\n\n/* Desktop styles */\n@media (min-width: 768px) {\n    body {\n        padding: 2rem;\n    }\n\n    #app {\n        max-width: 800px;\n        padding: 2rem;\n    }\n\n    h1, h2 {\n        font-size: 1.8rem;\n    }\n\n    p {\n        font-size: 1.1rem;\n    }\n\n    .weather-gif img {\n        max-width: 80%;\n    }\n}"],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"AAAA,6BAA6B;AAC7B;IACI,2BAA2B;IAC3B,8BAA8B;IAC9B,2BAA2B;IAC3B,oCAAoC;IACpC,yCAAyC;AAC7C;;AAEA;IACI,SAAS;IACT,UAAU;IACV,sBAAsB;AAC1B;;AAEA,6BAA6B;AAC7B;IACI,8BAA8B;IAC9B,gBAAgB;IAChB,mBAAmB;IACnB,iBAAiB;IACjB,aAAa;IACb,8EAA8E;AAClF;;AAEA,2BAA2B;AAC3B;IACI,WAAW;IACX,eAAe;IACf,cAAc;IACd,eAAe;IACf,2BAA2B;IAC3B,mBAAmB;IACnB,yCAAyC;IACzC,4BAA4B;IAC5B,oCAAoC;IACpC,qCAAqC;AACzC;;AAEA,iBAAiB;AACjB;IACI,aAAa;IACb,sBAAsB;IACtB,SAAS;IACT,mBAAmB;AACvB;;AAEA;IACI,iBAAiB;IACjB,mBAAmB;IACnB,iBAAiB;AACrB;;AAEA;IACI,WAAW;IACX,eAAe;IACf,qCAAqC;IACrC,mBAAmB;IACnB,eAAe;IACf,qCAAqC;IACrC,mBAAmB;IACnB,0BAA0B;IAC1B,kCAAkC;AACtC;;AAEA;IACI,aAAa;IACb,8BAA8B;IAC9B,6CAA6C;AACjD;;AAEA;IACI,+BAA+B;AACnC;;AAEA;IACI,WAAW;IACX,eAAe;IACf,kCAAkC;IAClC,sBAAsB;IACtB,YAAY;IACZ,mBAAmB;IACnB,eAAe;IACf,eAAe;IACf,iBAAiB;IACjB,yBAAyB;AAC7B;;AAEA;IACI,yCAAyC;IACzC,2BAA2B;AAC/B;;AAEA,aAAa;AACb;IACI,uBAAuB;IACvB,qBAAqB;IACrB,iBAAiB;IACjB,gDAAgD;IAChD,sBAAsB;AAC1B;;AAEA,wBAAwB;AACxB;IACI,gBAAgB;IAChB,eAAe;IACf,mBAAmB;AACvB;;AAEA,wBAAwB;AACxB;IACI,gBAAgB;IAChB,kBAAkB;AACtB;;AAEA;IACI,eAAe;IACf,YAAY;IACZ,mBAAmB;IACnB,yCAAyC;AAC7C;;AAEA,sBAAsB;AACtB;IACI,aAAa;IACb,cAAc;IACd,qCAAqC;IACrC,mBAAmB;IACnB,uCAAuC;IACvC,0BAA0B;IAC1B,kCAAkC;AACtC;;AAEA,oBAAoB;AACpB;IACI,eAAe;IACf,MAAM;IACN,OAAO;IACP,WAAW;IACX,YAAY;IACZ,iCAAiC;IACjC,aAAa;IACb,uBAAuB;IACvB,mBAAmB;IACnB,aAAa;IACb,0BAA0B;AAC9B;;AAEA,oBAAoB;AACpB;IACI,WAAW;IACX,YAAY;IACZ,yCAAyC;IACzC,kBAAkB;IAClB,mCAAmC;IACnC,uCAAuC;IACvC,cAAc;AAClB;;AAEA;IACI,wBAAwB;IACxB,kBAAkB;IAClB,gBAAgB;IAChB,iBAAiB;AACrB;;AAEA;IACI;QACI,yBAAyB;IAC7B;AACJ;;AAEA,2BAA2B;AAC3B;IACI,aAAa;AACjB;;AAEA,mBAAmB;AACnB;IACI;QACI,aAAa;IACjB;;IAEA;QACI,gBAAgB;QAChB,aAAa;IACjB;;IAEA;QACI,iBAAiB;IACrB;;IAEA;QACI,iBAAiB;IACrB;;IAEA;QACI,cAAc;IAClB;AACJ","sourcesContent":["/* Base reset and variables */\n:root {\n    --gunmetal: rgb(41, 47, 54);\n    --robin-egg: rgb(78, 205, 196);\n    --white: rgb(255, 255, 255);\n    --glass-bg: rgba(255, 255, 255, 0.1);\n    --glass-border: rgba(255, 255, 255, 0.18);\n}\n\n* {\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n}\n\n/* Mobile-first base styles */\nbody {\n    font-family: Arial, sans-serif;\n    line-height: 1.6;\n    color: var(--white);\n    min-height: 100vh;\n    padding: 1rem;\n    background: linear-gradient(135deg, var(--gunmetal) 0%, var(--robin-egg) 100%);\n}\n\n/* Glass container effect */\n#app {\n    width: 100%;\n    max-width: 100%;\n    margin: 0 auto;\n    padding: 1.5rem;\n    background: var(--glass-bg);\n    border-radius: 16px;\n    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);\n    backdrop-filter: blur(8.5px);\n    -webkit-backdrop-filter: blur(8.5px);\n    border: 1px solid var(--glass-border);\n}\n\n/* Form styling */\n#locationForm {\n    display: flex;\n    flex-direction: column;\n    gap: 1rem;\n    margin-bottom: 2rem;\n}\n\n#locationForm label {\n    font-weight: bold;\n    color: var(--white);\n    font-size: 1.1rem;\n}\n\n#locationForm input {\n    width: 100%;\n    padding: 0.8rem;\n    border: 2px solid var(--glass-border);\n    border-radius: 12px;\n    font-size: 1rem;\n    background: rgba(255, 255, 255, 0.05);\n    color: var(--white);\n    backdrop-filter: blur(4px);\n    -webkit-backdrop-filter: blur(4px);\n}\n\n#locationForm input:focus {\n    outline: none;\n    border-color: var(--robin-egg);\n    box-shadow: 0 0 0 2px rgba(78, 205, 196, 0.2);\n}\n\n#locationForm input::placeholder {\n    color: rgba(255, 255, 255, 0.6);\n}\n\n#locationForm button {\n    width: 100%;\n    padding: 0.8rem;\n    background-color: var(--robin-egg);\n    color: var(--gunmetal);\n    border: none;\n    border-radius: 12px;\n    cursor: pointer;\n    font-size: 1rem;\n    font-weight: bold;\n    transition: all 0.3s ease;\n}\n\n#locationForm button:hover {\n    background-color: rgba(78, 205, 196, 0.8);\n    transform: translateY(-2px);\n}\n\n/* Headings */\nh1, h2 {\n    color: var(--robin-egg);\n    margin-bottom: 1.5rem;\n    font-size: 1.5rem;\n    border-bottom: 2px solid rgba(78, 205, 196, 0.3);\n    padding-bottom: 0.5rem;\n}\n\n/* Weather information */\np {\n    margin: 0.8rem 0;\n    font-size: 1rem;\n    color: var(--white);\n}\n\n/* Weather GIF styling */\n.weather-gif {\n    margin: 1.5rem 0;\n    text-align: center;\n}\n\n.weather-gif img {\n    max-width: 100%;\n    height: auto;\n    border-radius: 16px;\n    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);\n}\n\n/* Forecast sections */\ndiv:has(> h2:contains(\"Forecast\")) div {\n    padding: 1rem;\n    margin: 1rem 0;\n    background: rgba(255, 255, 255, 0.05);\n    border-radius: 12px;\n    border-left: 4px solid var(--robin-egg);\n    backdrop-filter: blur(4px);\n    -webkit-backdrop-filter: blur(4px);\n}\n\n/* Loading overlay */\n.loading-overlay {\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    background: rgba(41, 47, 54, 0.9);\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    z-index: 1000;\n    backdrop-filter: blur(5px);\n}\n\n/* Loading spinner */\n.loader {\n    width: 50px;\n    height: 50px;\n    border: 5px solid rgba(78, 205, 196, 0.3);\n    border-radius: 50%;\n    border-top-color: rgb(78, 205, 196);\n    animation: spin 1s ease-in-out infinite;\n    margin: 0 auto;\n}\n\n.loader-text {\n    color: rgb(78, 205, 196);\n    text-align: center;\n    margin-top: 20px;\n    font-size: 1.2rem;\n}\n\n@keyframes spin {\n    to {\n        transform: rotate(360deg);\n    }\n}\n\n/* Hide loader by default */\n.hidden {\n    display: none;\n}\n\n/* Desktop styles */\n@media (min-width: 768px) {\n    body {\n        padding: 2rem;\n    }\n\n    #app {\n        max-width: 800px;\n        padding: 2rem;\n    }\n\n    h1, h2 {\n        font-size: 1.8rem;\n    }\n\n    p {\n        font-size: 1.1rem;\n    }\n\n    .weather-gif img {\n        max-width: 80%;\n    }\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -863,6 +907,29 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
 
 
 var appContainer = document.querySelector('#app');
+function createLoadingOverlay() {
+  var overlay = document.createElement('div');
+  overlay.className = 'loading-overlay hidden';
+  var loaderContainer = document.createElement('div');
+  loaderContainer.style.textAlign = 'center';
+  var loader = document.createElement('div');
+  loader.className = 'loader';
+  var text = document.createElement('div');
+  text.className = 'loader-text';
+  text.textContent = 'Consulting the cloud whisperers... or maybe just a squirrel. Stay tuned!';
+  loaderContainer.appendChild(loader);
+  loaderContainer.appendChild(text);
+  overlay.appendChild(loaderContainer);
+  document.body.appendChild(overlay);
+  return overlay;
+}
+var loadingOverlay = createLoadingOverlay();
+function showLoading() {
+  loadingOverlay.classList.remove('hidden');
+}
+function hideLoading() {
+  loadingOverlay.classList.add('hidden');
+}
 function createLocationForm() {
   if (document.querySelector('#locationForm')) return;
   var form = document.createElement('form');
@@ -891,19 +958,32 @@ function createLocationForm() {
             event.preventDefault();
             location = input.value.trim();
             if (!location) {
-              _context.next = 7;
+              _context.next = 18;
               break;
             }
-            _context.next = 5;
+            showLoading();
+            _context.prev = 4;
+            _context.next = 7;
             return (0,_api_js__WEBPACK_IMPORTED_MODULE_0__.getWeather)(location);
-          case 5:
+          case 7:
             weatherData = _context.sent;
             displayWeatherData(weatherData);
-          case 7:
+            _context.next = 15;
+            break;
+          case 11:
+            _context.prev = 11;
+            _context.t0 = _context["catch"](4);
+            console.error('Error fetching weather: ', _context.t0);
+            appContainer.innerHTML = "\n                <div style=\"color: #ff6b6b; padding: 20px; text-align: center;\">\n                    Unable to find weather data. Please try again.\n                </div>\n                ";
+          case 15:
+            _context.prev = 15;
+            hideLoading();
+            return _context.finish(15);
+          case 18:
           case "end":
             return _context.stop();
         }
-      }, _callee);
+      }, _callee, null, [[4, 11, 15, 18]]);
     }));
     return function (_x) {
       return _ref.apply(this, arguments);
