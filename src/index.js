@@ -3,6 +3,39 @@ import './style.css';
 
 const appContainer = document.querySelector('#app');
 
+function createLoadingOverlay() {
+    const overlay = document.createElement('div');
+    overlay.className = 'loading-overlay hidden';
+    
+    const loaderContainer = document.createElement('div');
+    loaderContainer.style.textAlign = 'center';
+    
+    const loader = document.createElement('div');
+    loader.className = 'loader';
+
+    const text = document.createElement('div');
+    text.className = 'loader-text';
+    text.textContent = 'Consulting the cloud whisperers... or maybe just a squirrel. Stay tuned!';
+
+    loaderContainer.appendChild(loader);
+    loaderContainer.appendChild(text);
+    overlay.appendChild(loaderContainer);
+
+    document.body.appendChild(overlay);
+
+    return overlay;
+}
+
+const loadingOverlay = createLoadingOverlay();
+
+function showLoading() {
+    loadingOverlay.classList.remove('hidden');
+}
+
+function hideLoading() {
+    loadingOverlay.classList.add('hidden');
+}
+
 function createLocationForm() {
     if (document.querySelector('#locationForm')) return;
 
@@ -33,11 +66,22 @@ function createLocationForm() {
         event.preventDefault();
         const location = input.value.trim();
         if (location) {
-            const weatherData = await getWeather(location);
-            displayWeatherData(weatherData);
+            showLoading();
+            try {
+                const weatherData = await getWeather(location);
+                displayWeatherData(weatherData);
+            } catch (error) {
+                console.error('Error fetching weather: ', error);
+                appContainer.innerHTML =`
+                <div style="color: #ff6b6b; padding: 20px; text-align: center;">
+                    Unable to find weather data. Please try again.
+                </div>
+                `;
+            } finally {
+                hideLoading();
+            }
         }
     });
-
 }
 
 function displayWeatherData({ currentWeather, forecast }) {
