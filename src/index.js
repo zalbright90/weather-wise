@@ -1,4 +1,4 @@
-import { getWeather } from './api.js';
+import { getWeather, getGif } from './api.js';
 
 const appContainer = document.querySelector('#app');
 
@@ -50,6 +50,7 @@ function displayWeatherData({ currentWeather, forecast }) {
         <p>Humidity: ${currentWeather.humidity}%</p>
         <p>Wind Speed: ${currentWeather.windspeed} mp/h</p>
         <p>Wind Direction: ${currentWeather.windDirection}°</p>
+        <div class="weather-gif"></div>
     `;
 
     const forecastDiv = document.createElement('div');
@@ -65,8 +66,16 @@ function displayWeatherData({ currentWeather, forecast }) {
         `;
         forecastDiv.appendChild(dayDiv);
     });
+
     appContainer.appendChild(currentWeatherDiv);
     appContainer.appendChild(forecastDiv);
+
+    getGif(currentWeather.conditions).then(gifUrl => {
+        if (gifUrl) {
+            const gifContainer = currentWeatherDiv.querySelector('.weather-gif');
+            gifContainer.innerHTML = `<img src="${gifUrl}" alt="Weather conditions visualization">`;
+        }
+    });
 }
 
 createLocationForm();

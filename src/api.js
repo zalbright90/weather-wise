@@ -17,16 +17,14 @@ async function getWeather(location) {
         const currentWeather = processCurrentWeather(data);
         const forecast = processForecast(data);
 
-        console.log('Current Weather:', currentWeather);
-        console.log('Forecast:', forecast);
-
         // Get GIF based on current weather condition
         const currentCondition = data.currentConditions.conditions;
-        getGif(currentCondition);
+        const gifUrl = await getGif(currentCondition);
 
-        return { currentWeather, forecast };
+        return { currentWeather, forecast, gifUrl };
     } catch (error) {
         console.error('Error fetching weather data:', error);
+        throw error;
     }
 }
 
@@ -36,9 +34,10 @@ async function getGif(weatherCondition) {
     try {
         const response = await fetch(url);
         const data = await response.json();
-        console.log('GIF data:', data);
+        return data.data.images.original.url;
     } catch(error) {
         console.error('Error fetching GIF:', error);
+        return null;
     }
 }
 
