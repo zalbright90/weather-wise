@@ -28,7 +28,7 @@ function getWeather(_x) {
 }
 function _getWeather() {
   _getWeather = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(location) {
-    var response, data, currentWeather, forecast, currentCondition;
+    var response, data, currentWeather, forecast, currentCondition, gifUrl;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
@@ -47,22 +47,23 @@ function _getWeather() {
 
           // Process weather data
           currentWeather = (0,_processCurrentWeather__WEBPACK_IMPORTED_MODULE_0__.processCurrentWeather)(data);
-          forecast = (0,_processForecast__WEBPACK_IMPORTED_MODULE_1__.processForecast)(data);
-          console.log('Current Weather:', currentWeather);
-          console.log('Forecast:', forecast);
-
-          // Get GIF based on current weather condition
+          forecast = (0,_processForecast__WEBPACK_IMPORTED_MODULE_1__.processForecast)(data); // Get GIF based on current weather condition
           currentCondition = data.currentConditions.conditions;
-          getGif(currentCondition);
+          _context.next = 13;
+          return getGif(currentCondition);
+        case 13:
+          gifUrl = _context.sent;
           return _context.abrupt("return", {
             currentWeather: currentWeather,
-            forecast: forecast
+            forecast: forecast,
+            gifUrl: gifUrl
           });
         case 17:
           _context.prev = 17;
           _context.t0 = _context["catch"](0);
           console.error('Error fetching weather data:', _context.t0);
-        case 20:
+          throw _context.t0;
+        case 21:
         case "end":
           return _context.stop();
       }
@@ -89,14 +90,13 @@ function _getGif() {
           return response.json();
         case 7:
           data = _context2.sent;
-          console.log('GIF data:', data);
-          _context2.next = 14;
-          break;
+          return _context2.abrupt("return", data.data.images.original.url);
         case 11:
           _context2.prev = 11;
           _context2.t0 = _context2["catch"](1);
           console.error('Error fetching GIF:', _context2.t0);
-        case 14:
+          return _context2.abrupt("return", null);
+        case 15:
         case "end":
           return _context2.stop();
       }
@@ -277,7 +277,7 @@ function displayWeatherData(_ref2) {
     forecast = _ref2.forecast;
   appContainer.innerHTML = '';
   var currentWeatherDiv = document.createElement('div');
-  currentWeatherDiv.innerHTML = "\n        <h2>Current Weather</h2>\n        <p>Temperature: ".concat(currentWeather.temperature, "\xB0F</p>\n        <p>Conditions: ").concat(currentWeather.conditions, "</p>\n        <p>Humidity: ").concat(currentWeather.humidity, "%</p>\n        <p>Wind Speed: ").concat(currentWeather.windspeed, " mp/h</p>\n        <p>Wind Direction: ").concat(currentWeather.windDirection, "\xB0</p>\n    ");
+  currentWeatherDiv.innerHTML = "\n        <h2>Current Weather</h2>\n        <p>Temperature: ".concat(currentWeather.temperature, "\xB0F</p>\n        <p>Conditions: ").concat(currentWeather.conditions, "</p>\n        <p>Humidity: ").concat(currentWeather.humidity, "%</p>\n        <p>Wind Speed: ").concat(currentWeather.windspeed, " mp/h</p>\n        <p>Wind Direction: ").concat(currentWeather.windDirection, "\xB0</p>\n        <div class=\"weather-gif\"></div>\n    ");
   var forecastDiv = document.createElement('div');
   forecastDiv.innerHTML = '<h2>Forecast</h2>';
   forecast.forEach(function (day) {
@@ -287,6 +287,12 @@ function displayWeatherData(_ref2) {
   });
   appContainer.appendChild(currentWeatherDiv);
   appContainer.appendChild(forecastDiv);
+  (0,_api_js__WEBPACK_IMPORTED_MODULE_0__.getGif)(currentWeather.conditions).then(function (gifUrl) {
+    if (gifUrl) {
+      var gifContainer = currentWeatherDiv.querySelector('.weather-gif');
+      gifContainer.innerHTML = "<img src=\"".concat(gifUrl, "\" alt=\"Weather conditions visualization\">");
+    }
+  });
 }
 createLocationForm();
 })();

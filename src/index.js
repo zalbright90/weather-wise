@@ -1,4 +1,5 @@
 import { getWeather, getGif } from './api.js';
+import './style.css';
 
 const appContainer = document.querySelector('#app');
 
