@@ -93,7 +93,7 @@ function displayWeatherData({ currentWeather, forecast }) {
         <p>Temperature: ${currentWeather.temperature}°F</p>
         <p>Conditions: ${currentWeather.conditions}</p>
         <p>Humidity: ${currentWeather.humidity}%</p>
-        <p>Wind Speed: ${currentWeather.windspeed} mp/h</p>
+        <p>Wind Speed: ${currentWeather.windSpeed} mp/h</p>
         <p>Wind Direction: ${currentWeather.windDirection}°</p>
         <div class="weather-gif"></div>
     `;
