@@ -995,7 +995,7 @@ function displayWeatherData(_ref2) {
     forecast = _ref2.forecast;
   appContainer.innerHTML = '';
   var currentWeatherDiv = document.createElement('div');
-  currentWeatherDiv.innerHTML = "\n        <h2>Current Weather</h2>\n        <p>Temperature: ".concat(currentWeather.temperature, "\xB0F</p>\n        <p>Conditions: ").concat(currentWeather.conditions, "</p>\n        <p>Humidity: ").concat(currentWeather.humidity, "%</p>\n        <p>Wind Speed: ").concat(currentWeather.windspeed, " mp/h</p>\n        <p>Wind Direction: ").concat(currentWeather.windDirection, "\xB0</p>\n        <div class=\"weather-gif\"></div>\n    ");
+  currentWeatherDiv.innerHTML = "\n        <h2>Current Weather</h2>\n        <p>Temperature: ".concat(currentWeather.temperature, "\xB0F</p>\n        <p>Conditions: ").concat(currentWeather.conditions, "</p>\n        <p>Humidity: ").concat(currentWeather.humidity, "%</p>\n        <p>Wind Speed: ").concat(currentWeather.windSpeed, " mp/h</p>\n        <p>Wind Direction: ").concat(currentWeather.windDirection, "\xB0</p>\n        <div class=\"weather-gif\"></div>\n    ");
   var forecastDiv = document.createElement('div');
   forecastDiv.innerHTML = '<h2>Forecast</h2>';
   forecast.forEach(function (day) {
