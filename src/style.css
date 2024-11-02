@@ -15,6 +15,9 @@
 
 /* Mobile-first base styles */
 body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     font-family: Arial, sans-serif;
     line-height: 1.6;
     color: var(--white);
@@ -25,6 +28,7 @@ body {
 
 /* Glass container effect */
 #app {
+    flex: 1;
     width: 100%;
     max-width: 100%;
     margin: 0 auto;
@@ -162,6 +166,32 @@ div:has(> h2:contains("Forecast")) div {
     text-align: center;
     margin-top: 20px;
     font-size: 1.2rem;
+}
+
+footer {
+    background-color: var(--gunmetal);
+    color: var(--white);
+    text-align: center;
+    padding: 1rem;
+    width: 100%;
+    margin-top: auto;
+    
+}
+
+.social-links {
+    margin-top: 0.5rem;
+}
+
+.social-links a {
+    color: var(--robin-egg);
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+    text-decoration: none;
+    margin: 0 0.5rem;
+}
+
+.social-links a:hover {
+    color: rgba(78, 205, 196, 0.3);
 }
 
 @keyframes spin {
