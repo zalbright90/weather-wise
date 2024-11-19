@@ -168,6 +168,36 @@ div:has(> h2:contains("Forecast")) div {
     font-size: 1.2rem;
 }
 
+/* Weather Icons */
+.weather-icon {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+    padding: 10px;
+    width: 50px;
+    height: 50px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+/* Icon Mappings */
+.weather-icon.snow { background-image: url('https://raw.githubusercontent.com/visualcrossing/WeatherIcons/main/SVG/2nd%20Set%20-%20Color/snow.svg'); }
+.weather-icon.snow-showers-day { background-image: url('https://raw.githubusercontent.com/visualcrossing/WeatherIcons/main/SVG/2nd%20Set%20-%20Color/snow-showers-day.svg'); }
+.weather-icon.snow-showers-night { background-image: url('https://raw.githubusercontent.com/visualcrossing/WeatherIcons/main/SVG/2nd%20Set%20-%20Color/snow-showers-night.svg'); }
+.weather-icon.thunder-rain { background-image: url('https://raw.githubusercontent.com/visualcrossing/WeatherIcons/main/SVG/2nd%20Set%20-%20Color/thunder-rain.svg'); }
+.weather-icon.thunder-showers-day { background-image: url('https://raw.githubusercontent.com/visualcrossing/WeatherIcons/main/SVG/2nd%20Set%20-%20Color/thunder-showers-day.svg'); }
+.weather-icon.thunder-showers-night { background-image: url('https://raw.githubusercontent.com/visualcrossing/WeatherIcons/main/SVG/2nd%20Set%20-%20Color/thunder-showers-night.svg'); }
+.weather-icon.rain { background-image: url('https://raw.githubusercontent.com/visualcrossing/WeatherIcons/main/SVG/2nd%20Set%20-%20Color/rain.svg'); }
+.weather-icon.showers-day { background-image: url('https://raw.githubusercontent.com/visualcrossing/WeatherIcons/main/SVG/2nd%20Set%20-%20Color/showers-day.svg'); }
+.weather-icon.showers-night { background-image: url('https://raw.githubusercontent.com/visualcrossing/WeatherIcons/main/SVG/2nd%20Set%20-%20Color/showers-night.svg'); }
+.weather-icon.fog { background-image: url('https://raw.githubusercontent.com/visualcrossing/WeatherIcons/main/SVG/2nd%20Set%20-%20Color/fog.svg'); }
+.weather-icon.wind { background-image: url('https://raw.githubusercontent.com/visualcrossing/WeatherIcons/main/SVG/2nd%20Set%20-%20Color/wind.svg'); }
+.weather-icon.cloudy { background-image: url('https://raw.githubusercontent.com/visualcrossing/WeatherIcons/main/SVG/2nd%20Set%20-%20Color/cloudy.svg'); }
+.weather-icon.partly-cloudy-day { background-image: url('https://raw.githubusercontent.com/visualcrossing/WeatherIcons/main/SVG/2nd%20Set%20-%20Color/partly-cloudy-day.svg'); }
+.weather-icon.partly-cloudy-night { background-image: url('https://raw.githubusercontent.com/visualcrossing/WeatherIcons/main/SVG/2nd%20Set%20-%20Color/partly-cloudy-night.svg'); }
+.weather-icon.clear-day { background-image: url('https://raw.githubusercontent.com/visualcrossing/WeatherIcons/main/SVG/2nd%20Set%20-%20Color/clear-day.svg'); }
+.weather-icon.clear-night { background-image: url('https://raw.githubusercontent.com/visualcrossing/WeatherIcons/main/SVG/2nd%20Set%20-%20Color/clear-night.svg'); }
+
 footer {
     background-color: var(--gunmetal);
     color: var(--white);
@@ -175,7 +205,6 @@ footer {
     padding: 1rem;
     width: 100%;
     margin-top: auto;
-    
 }
 
 .social-links {

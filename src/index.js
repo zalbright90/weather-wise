@@ -90,6 +90,7 @@ function displayWeatherData({ currentWeather, forecast }) {
     const currentWeatherDiv = document.createElement('div');
     currentWeatherDiv.innerHTML = `
         <h2>Current Weather</h2>
+        <div class="weather-icon ${currentWeather.icon}"></div>
         <p>Temperature: ${currentWeather.temperature}°F</p>
         <p>Conditions: ${currentWeather.conditions}</p>
         <p>Humidity: ${currentWeather.humidity}%</p>
@@ -103,6 +104,7 @@ function displayWeatherData({ currentWeather, forecast }) {
     forecast.forEach(day => {
         const dayDiv = document.createElement('div');
         dayDiv.innerHTML = `
+        <div class="weather-icon ${day.icon}"></div>
         <p><strong>Date:</strong> ${day.date}</p>
         <p><strong>Max Temp:</strong> ${day.maxTemp}°F</p>
         <p><strong>Min Temp:</strong> ${day.minTemp}°F</p>

@@ -1,3 +1,5 @@
+import { getWeatherIcon } from './weatherIcons';
+
 export function processCurrentWeather(data) {
     const currentConditions =  data.currentConditions || {};
     
@@ -7,5 +9,11 @@ export function processCurrentWeather(data) {
         humidity: data.currentConditions.humidity,
         windSpeed: data.currentConditions.windspeed,
         windDirection: data.currentConditions.winddir,
+        icon: getWeatherIcon (
+            currentConditions.conditions,
+            data.currentConditions.datetime,
+            data.currentConditions.sunrise,
+            data.currentConditions.sunset
+        )
     };
 }
