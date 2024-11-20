@@ -32,7 +32,10 @@ function getWeatherIcon(conditions, datetime, sunrise, sunset) {
     const isNight = isNightTime(datetime, sunrise, sunset);
 
     //Convert conditions for matching conditions
-    const normalizedConditions = conditions.toLowerCase().replace(/\s+/g, '-');
+    const normalizedConditions = conditions
+       .toLowerCase()
+       .split(',')
+       .map(condition => condition.trim().replace(/\s+/g, '-'));
 
     // Check for specific conditions that have day/night
     if (normalizedConditions.includes('clear') || normalizedConditions.includes('sunny')) {
@@ -51,8 +54,15 @@ function getWeatherIcon(conditions, datetime, sunrise, sunset) {
         return isNight ? 'thunder-showers-night' : 'thunder-showers-day';
     }
 
-    // For other conditions, try to match directly from the map
-    return iconMap[normalizedConditions] || 'cloudy';
+    // Loop through normalized conditions to find a match in iconMap
+    for (const condition of normalizedConditions) {
+        if (iconMap[condition]) {
+            return iconMap[condition];
+        }
+    }
+    console.log("Normalized Conditions:", normalizedConditions);
+    return 'cloudy';
+    
 }
 
 export { getWeatherIcon };
